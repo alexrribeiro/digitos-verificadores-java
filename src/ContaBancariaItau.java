@@ -11,7 +11,6 @@ public class ContaBancariaItau {
     }
 
     void calcularDigito(String agenciaEConta) {
-//        System.out.println("Entrando no calcular dígito");
         int caractere[] = new int[agenciaEConta.length()];
         int multiplicador = verificarMultiplicador(agenciaEConta);
         int soma = 0;
@@ -20,12 +19,10 @@ public class ContaBancariaItau {
         for (int i = 0; i < agenciaEConta.length(); i++) {
             if (i != agenciaEConta.length()-1) {
                 caractere[i] = Integer.parseInt(agenciaEConta.substring(i, i+1));
-//                System.out.println("Caractere:" + caractere[i]);
                 produtoDigito[i] = caractere[i] * multiplicador;
                 if (produtoDigito[i] >= 10) {
                     produtoDigito[i] = 1 + (produtoDigito[i] - 10);
                 }
-//                System.out.println("C: " + caractere[i] + "\tM: " + multiplicador + "\tP: " + produtoDigito[i]);
                 if (multiplicador == 1) {
                     multiplicador = 2;
                 } else if (multiplicador == 2) {
@@ -35,17 +32,13 @@ public class ContaBancariaItau {
             }
             else {
                 digitoVerificadorInformado = Integer.parseInt(agenciaEConta.substring(i, i + 1));
-//                System.out.println("Dígito: " + digitoVerificadorInformado);
             }
         }
-//        System.out.println("Soma: " + soma);
 
         digitoVerificador = 10 - (soma % 10);
         if (digitoVerificador == 10) {
             digitoVerificador = 0;
         }
-
-//        System.out.println("DV: " + digitoVerificador);
     }
 
     int verificarMultiplicador(String agenciaEConta) {
@@ -70,17 +63,11 @@ public class ContaBancariaItau {
         else {
             contaValida = false;
         }
-//        System.out.println("Recebendo agencia e conta em Verificar Dígito");
-//        System.out.println(agenciaEConta);
         return contaValida;
     }
 
     String concatenarAgenciaEConta(String agencia, String conta) {
-//        System.out.println("Recebendo informações para concatenar");
-//        System.out.println(agencia);
-//        System.out.println(conta);
         String agenciaEConta = agencia + conta;
-//        System.out.println(agenciaEConta);
         return agenciaEConta;
     }
 
@@ -101,6 +88,6 @@ public class ContaBancariaItau {
 
     public static void main(String[] args) {
         ContaBancariaItau cb = new ContaBancariaItau();
-        System.out.println(cb.validarConta("0709","23895-0"));
+        System.out.println(cb.validarConta("0747","46128-3"));
     }
 }
