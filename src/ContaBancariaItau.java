@@ -72,6 +72,7 @@ public class ContaBancariaItau {
     }
 
     String validarConta(String agencia, String conta) {
+        System.out.println("Agencia: " + agencia + "\tConta: " + conta);
         String agenciaEConta = concatenarAgenciaEConta(agencia, conta)
                 .replace(".","")
                 .replace("-","");
