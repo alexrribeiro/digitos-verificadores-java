@@ -58,13 +58,19 @@ public class ContaBancariaBradesco {
         return valido;
     }
 
-    String validarConta(String agencia, String conta) {
-        System.out.println("Agencia: " + agencia);
-        System.out.println("Conta: " + conta);
-        String mensagem = "";
-        agencia = agencia
+    String removerCaracteresEspeciais (String texto) {
+        texto = texto
                 .replace(".","")
-                .replace("-","");
+                .replace("-","")
+                .replace(" ","")
+                .replace("/","");
+        return texto;
+    }
+
+    String validarConta(String agencia, String conta) {
+        System.out.println("Agência: " + agencia + "\tConta: " + conta);
+        String mensagem = "";
+        agencia = removerCaracteresEspeciais(agencia);
         valido = verificarDigito(agencia, "a");
 
         if (valido) {
@@ -73,9 +79,7 @@ public class ContaBancariaBradesco {
             mensagem = "Número da agência inválido!\t";
         }
 
-        conta = conta
-                .replace(".","")
-                .replace("-","");
+        conta = removerCaracteresEspeciais(conta);
         valido = verificarDigito(conta, "c");
 
         if (valido) {

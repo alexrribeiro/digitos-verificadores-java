@@ -20,10 +20,7 @@ public class ContaBancariaSantander {
                 caractere[i] = Integer.parseInt(valor.substring(i, i+1));
                 multiplicador = verificarMultiplicador(i);
                 produtoDigito[i] = caractere[i] * multiplicador;
-                if (produtoDigito[i] >= 10) {
-                    produtoDigito[i] = produtoDigito[i] % 10; // Descarta a dezena e fica só a unidade
-                }
-//                System.out.println("C: " + caractere[i] + "\tM: " + multiplicador + "\tP: " + produtoDigito[i]);
+                produtoDigito[i] = descartarDezena(produtoDigito[i]);
 
                 total += produtoDigito[i];
             }
@@ -32,15 +29,19 @@ public class ContaBancariaSantander {
                 if (digitoVerificadorInformado == 0) {
                     digitoVerificadorInformado = 10;
                 }
-//                System.out.println("DV informado: " + digitoVerificadorInformado);
             }
         }
 
-        if (total >= 10) {
-            total = total % 10; // Descarta a dezena e fica só a unidade
-        }
+        total = descartarDezena(total);
         digitoVerificador = 10 - total;
 //        System.out.println("DV encontrado: " + digitoVerificador);
+    }
+
+    int descartarDezena(int valor) {
+        if (valor >= 10) {
+            valor = valor % 10;
+        }
+        return valor;
     }
 
     int verificarMultiplicador(int posicao) {
