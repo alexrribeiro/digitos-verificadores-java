@@ -10,7 +10,7 @@ public class ContaBancariaItau {
         this.conta = conta;
     }
 
-    void calcularDigito(String agenciaEConta) {
+    private void calcularDigito(String agenciaEConta) {
         int caractere[] = new int[agenciaEConta.length()];
         int multiplicador = verificarMultiplicador(agenciaEConta);
         int soma = 0;
@@ -41,7 +41,7 @@ public class ContaBancariaItau {
         }
     }
 
-    int verificarMultiplicador(String agenciaEConta) {
+    private int verificarMultiplicador(String agenciaEConta) {
 //        Apesar do Itaú ter um padrão 4 dígitos para agência e 5+DV para conta,
 //        vai que alguém não coloca o zero... aí como está lendo da esquerda para a direita...
         int multiplicador = 0;
@@ -54,7 +54,7 @@ public class ContaBancariaItau {
         return multiplicador;
     }
 
-    boolean verificarDigito(String agenciaEConta) {
+    private boolean verificarDigito(String agenciaEConta) {
         boolean contaValida;
         calcularDigito(agenciaEConta);
         if (digitoVerificador == digitoVerificadorInformado) {
@@ -66,12 +66,12 @@ public class ContaBancariaItau {
         return contaValida;
     }
 
-    String concatenarAgenciaEConta(String agencia, String conta) {
+    private String concatenarAgenciaEConta(String agencia, String conta) {
         String agenciaEConta = agencia + conta;
         return agenciaEConta;
     }
 
-    String validarConta(String agencia, String conta) {
+    public String validarConta(String agencia, String conta) {
         System.out.println("Agencia: " + agencia + "\tConta: " + conta);
         String agenciaEConta = concatenarAgenciaEConta(agencia, conta)
                 .replace(".","")

@@ -11,7 +11,7 @@ public class RegistroGeral {
         this.numeroRg = numeroRg;
     }
 
-    void calcularDigito(String numeroRg) {
+    private void calcularDigito(String numeroRg) {
         int caractere[] = new int[numeroRg.length()];
         int mult = numeroRg.length();
         int soma = 0;
@@ -43,7 +43,7 @@ public class RegistroGeral {
         digitoVerificador = soma % 11;
     }
 
-    boolean verificarDigito(String numeroRg) {
+    private boolean verificarDigito(String numeroRg) {
         calcularDigito(numeroRg);
         if (digitoVerificador == digitoVerificadorInformado) {
             rgValido = true;
@@ -54,7 +54,7 @@ public class RegistroGeral {
         return rgValido;
     }
 
-    String validarRegistroGeral(String numeroRg) {
+    public String validarRegistroGeral(String numeroRg) {
         numeroRg = numeroRg.replace(".","").replace("-","");
         boolean valido = verificarDigito(numeroRg);
         String mensagem;
@@ -75,6 +75,6 @@ public class RegistroGeral {
         System.out.println(rg.validarRegistroGeral(rg.numeroRg));
 
 //        RegistroGeral rg2 = new RegistroGeral();
-//        System.out.println(rg2.validarRegistroGeral("47.935.647-6"));
+//        System.out.println(rg2.validarRegistroGeral("41.982.199-5"));
     }
 }

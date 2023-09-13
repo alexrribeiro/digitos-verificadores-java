@@ -9,7 +9,7 @@ public class ContaBancariaSantander {
         this.conta = conta;
     }
 
-    void calcularDigito(String valor) {
+    private void calcularDigito(String valor) {
         int caractere[] = new int[valor.length()];
         int multiplicador;
         int total = 0;
@@ -37,14 +37,14 @@ public class ContaBancariaSantander {
 //        System.out.println("DV encontrado: " + digitoVerificador);
     }
 
-    int descartarDezena(int valor) {
+    private int descartarDezena(int valor) {
         if (valor >= 10) {
             valor = valor % 10;
         }
         return valor;
     }
 
-    int verificarMultiplicador(int posicao) {
+    private int verificarMultiplicador(int posicao) {
         int multiplicador = 0;
         if (posicao == 3 || posicao == 6 || posicao == 8) {
             multiplicador = 1;
@@ -58,7 +58,7 @@ public class ContaBancariaSantander {
         return multiplicador;
     }
 
-    boolean verificarDigito(String agenciaEConta) {
+    private boolean verificarDigito(String agenciaEConta) {
         boolean contaValida;
         calcularDigito(agenciaEConta);
         if (digitoVerificador == digitoVerificadorInformado) {
@@ -70,12 +70,12 @@ public class ContaBancariaSantander {
         return contaValida;
     }
 
-    String concatenarAgenciaEConta(String agencia, String conta) {
+    private String concatenarAgenciaEConta(String agencia, String conta) {
         String agenciaEConta = agencia + conta;
         return agenciaEConta;
     }
 
-    String validarConta(String agencia, String conta) {
+    public String validarConta(String agencia, String conta) {
         System.out.println("Agencia: " + agencia + "\tConta: " + conta);
         String agenciaEConta = concatenarAgenciaEConta(agencia, conta)
                 .replace(".","")

@@ -10,7 +10,7 @@ public class ContaBancariaCaixa {
         this.conta = conta;
     }
 
-    void calcularDigito(String valor) {
+    private void calcularDigito(String valor) {
         int caractere[] = new int[valor.length()];
         int multiplicador = 2;
         int soma = 0;
@@ -48,7 +48,7 @@ public class ContaBancariaCaixa {
 //        System.out.println("DV Encontr: " + digitoVerificador);
     }
 
-    boolean verificarDigito(String valor) {
+    private boolean verificarDigito(String valor) {
         calcularDigito(valor);
         if (digitoVerificador == digitoInformado) {
             valido = true;
@@ -58,7 +58,7 @@ public class ContaBancariaCaixa {
         return valido;
     }
 
-    String validarConta(String agencia, String operacao, String conta) {
+    public String validarConta(String agencia, String operacao, String conta) {
         System.out.println("Agencia: " + agencia);
         System.out.println("Operação: " + operacao);
         System.out.println("Conta: " + conta);

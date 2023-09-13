@@ -9,7 +9,7 @@ public class ContaBancariaBradesco {
         this.conta = conta;
     }
 
-    void calcularDigito(String valor, String tipo) {
+    private void calcularDigito(String valor, String tipo) {
         int caractere[] = new int[valor.length()];
         int multiplicador = 2;
         int soma = 0;
@@ -48,7 +48,7 @@ public class ContaBancariaBradesco {
 //        System.out.println("DV Encontr: " + digitoVerificador);
     }
 
-    boolean verificarDigito(String valor, String tipo) {
+    private boolean verificarDigito(String valor, String tipo) {
         calcularDigito(valor, tipo);
         if (digitoVerificador == digitoInformado) {
             valido = true;
@@ -58,7 +58,7 @@ public class ContaBancariaBradesco {
         return valido;
     }
 
-    String removerCaracteresEspeciais (String texto) {
+    private String removerCaracteresEspeciais (String texto) {
         texto = texto
                 .replace(".","")
                 .replace("-","")
@@ -67,7 +67,7 @@ public class ContaBancariaBradesco {
         return texto;
     }
 
-    String validarConta(String agencia, String conta) {
+    public String validarConta(String agencia, String conta) {
         System.out.println("Agência: " + agencia + "\tConta: " + conta);
         String mensagem = "";
         agencia = removerCaracteresEspeciais(agencia);
