@@ -12,10 +12,10 @@ public class RegistroGeral {
     }
 
     private void calcularDigito(String numeroRg) {
-        int caractere[] = new int[numeroRg.length()];
+        int[] caractere = new int[numeroRg.length()];
         int mult = numeroRg.length();
         int soma = 0;
-        int produtoDigito[] = new int[numeroRg.length()];
+        int[] produtoDigito = new int[numeroRg.length()];
 
         // Extraindo os dígitos
         for (int i = 0; i < numeroRg.length(); i++) {
@@ -45,12 +45,7 @@ public class RegistroGeral {
 
     private boolean verificarDigito(String numeroRg) {
         calcularDigito(numeroRg);
-        if (digitoVerificador == digitoVerificadorInformado) {
-            rgValido = true;
-        }
-        else {
-            rgValido = false;
-        }
+        rgValido = digitoVerificador == digitoVerificadorInformado;
         return rgValido;
     }
 

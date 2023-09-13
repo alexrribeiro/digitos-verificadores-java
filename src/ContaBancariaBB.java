@@ -58,7 +58,7 @@ public class ContaBancariaBB {
 
     public String validarConta(String agencia, String conta) {
         System.out.println("Agencia: " + agencia + "\tConta: " + conta);
-        String mensagem = "";
+        String mensagem;
         agencia = removerCaracteresEspeciais(agencia);
         valido = verificarDigito(agencia);
 

@@ -11,10 +11,10 @@ public class ContaBancariaItau {
     }
 
     private void calcularDigito(String agenciaEConta) {
-        int caractere[] = new int[agenciaEConta.length()];
+        int[] caractere = new int[agenciaEConta.length()];
         int multiplicador = verificarMultiplicador(agenciaEConta);
         int soma = 0;
-        int produtoDigito[] = new int[agenciaEConta.length()];
+        int[] produtoDigito = new int[agenciaEConta.length()];
 
         for (int i = 0; i < agenciaEConta.length(); i++) {
             if (i != agenciaEConta.length()-1) {
@@ -57,18 +57,12 @@ public class ContaBancariaItau {
     private boolean verificarDigito(String agenciaEConta) {
         boolean contaValida;
         calcularDigito(agenciaEConta);
-        if (digitoVerificador == digitoVerificadorInformado) {
-            contaValida = true;
-        }
-        else {
-            contaValida = false;
-        }
+        contaValida = digitoVerificador == digitoVerificadorInformado;
         return contaValida;
     }
 
     private String concatenarAgenciaEConta(String agencia, String conta) {
-        String agenciaEConta = agencia + conta;
-        return agenciaEConta;
+        return agencia + conta;
     }
 
     public String validarConta(String agencia, String conta) {

@@ -10,10 +10,10 @@ public class ContaBancariaSantander {
     }
 
     private void calcularDigito(String valor) {
-        int caractere[] = new int[valor.length()];
+        int[] caractere = new int[valor.length()];
         int multiplicador;
         int total = 0;
-        int produtoDigito[] = new int[valor.length()];
+        int[] produtoDigito = new int[valor.length()];
 
         for (int i = 0; i < valor.length(); i++) {
             if (i != valor.length()-1) {
@@ -61,18 +61,12 @@ public class ContaBancariaSantander {
     private boolean verificarDigito(String agenciaEConta) {
         boolean contaValida;
         calcularDigito(agenciaEConta);
-        if (digitoVerificador == digitoVerificadorInformado) {
-            contaValida = true;
-        }
-        else {
-            contaValida = false;
-        }
+        contaValida = digitoVerificador == digitoVerificadorInformado;
         return contaValida;
     }
 
     private String concatenarAgenciaEConta(String agencia, String conta) {
-        String agenciaEConta = agencia + conta;
-        return agenciaEConta;
+        return agencia + conta;
     }
 
     public String validarConta(String agencia, String conta) {

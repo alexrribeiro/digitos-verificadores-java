@@ -10,10 +10,10 @@ public class ContaBancariaBradesco {
     }
 
     private void calcularDigito(String valor, String tipo) {
-        int caractere[] = new int[valor.length()];
+        int[] caractere = new int[valor.length()];
         int multiplicador = 2;
         int soma = 0;
-        int produtoDigito[] = new int[valor.length()];
+        int[] produtoDigito = new int[valor.length()];
 
         for (int i = valor.length(); i > 0; i--) {
 //            System.out.println(i);
@@ -50,11 +50,7 @@ public class ContaBancariaBradesco {
 
     private boolean verificarDigito(String valor, String tipo) {
         calcularDigito(valor, tipo);
-        if (digitoVerificador == digitoInformado) {
-            valido = true;
-        } else {
-            valido = false;
-        }
+        valido = digitoVerificador == digitoInformado;
         return valido;
     }
 
@@ -69,7 +65,7 @@ public class ContaBancariaBradesco {
 
     public String validarConta(String agencia, String conta) {
         System.out.println("Agência: " + agencia + "\tConta: " + conta);
-        String mensagem = "";
+        String mensagem;
         agencia = removerCaracteresEspeciais(agencia);
         valido = verificarDigito(agencia, "a");
 

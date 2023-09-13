@@ -11,10 +11,10 @@ public class ContaBancariaCaixa {
     }
 
     private void calcularDigito(String valor) {
-        int caractere[] = new int[valor.length()];
+        int[] caractere = new int[valor.length()];
         int multiplicador = 2;
         int soma = 0;
-        int produtoDigito[] = new int[valor.length()];
+        int[] produtoDigito = new int[valor.length()];
 
         for (int i = valor.length(); i > 0; i--) {
 //            System.out.println(i);
@@ -39,9 +39,7 @@ public class ContaBancariaCaixa {
         }
 
         digitoVerificador = (soma * 10) % 11;
-        if (digitoVerificador == 11) {
-            digitoVerificador = 0;
-        } if (digitoVerificador == 10) {
+        if (digitoVerificador == 10) {
             digitoVerificador = 0;
         }
         // Se o resultado da conta dá 10, o dígito verificador é X. Para efeitos de cálculo aqui mantivemos como 10.
@@ -50,11 +48,7 @@ public class ContaBancariaCaixa {
 
     private boolean verificarDigito(String valor) {
         calcularDigito(valor);
-        if (digitoVerificador == digitoInformado) {
-            valido = true;
-        } else {
-            valido = false;
-        }
+        valido = digitoVerificador == digitoInformado;
         return valido;
     }
 
@@ -63,7 +57,7 @@ public class ContaBancariaCaixa {
         System.out.println("Operação: " + operacao);
         System.out.println("Conta: " + conta);
         String agenciaEConta = agencia + operacao + conta;
-        String mensagem = "";
+        String mensagem;
         agenciaEConta = agenciaEConta
                 .replace(".","")
                 .replace("-","");
