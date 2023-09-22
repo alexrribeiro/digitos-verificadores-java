@@ -33,7 +33,7 @@ public class CadastroPessoaFisica {
     private void informarDigitosVerificadores(String numeroCpf) {
         digitoVerificadorInformado1 = Integer.parseInt(numeroCpf.substring(9, 10));
         digitoVerificadorInformado2 = Integer.parseInt(numeroCpf.substring(10, 11));
-        System.out.println("DVs informados: " + digitoVerificadorInformado1 + digitoVerificadorInformado2);
+//        System.out.println("DVs informados: " + digitoVerificadorInformado1 + digitoVerificadorInformado2);
     }
 
     private int calcularDigitoVerificador(int[] grupo, int tamanho) {
@@ -47,7 +47,7 @@ public class CadastroPessoaFisica {
         if (digitoVerificador == 10) {
             digitoVerificador = 0;
         }
-        System.out.println("DV encontrado: " + digitoVerificador);
+//        System.out.println("DV encontrado: " + digitoVerificador);
         return digitoVerificador;
     }
 
@@ -59,14 +59,12 @@ public class CadastroPessoaFisica {
         int digitoVerificador2 = calcularDigitoVerificador(segundoGrupo, segundoGrupo.length - 1);
         cpfValido = digitoVerificador1 == digitoVerificadorInformado1 && digitoVerificador2 == digitoVerificadorInformado2;
 
-        System.out.println(numero);
         if (numero.equals("00000000000") || numero.equals("11111111111") || numero.equals("22222222222") ||
                 numero.equals( "33333333333") || numero.equals("44444444444") || numero.equals("55555555555") ||
                 numero.equals("66666666666") || numero.equals( "77777777777") ||numero.equals("88888888888") ||
                 numero.equals("99999999999")) {
             cpfValido = false;
         }
-        System.out.println(cpfValido);
 
         return cpfValido;
     }
@@ -77,9 +75,9 @@ public class CadastroPessoaFisica {
         String mensagem;
 
         if (valido) {
-            mensagem = "Número de CPF válido!";
+            mensagem = numero + ": Número de CPF válido!";
         } else {
-            mensagem = "Número de CPF inválido!";
+            mensagem = numero + ": Número de CPF inválido!";
         }
 
         return mensagem;
