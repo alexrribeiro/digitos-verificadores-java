@@ -60,9 +60,10 @@ public class CadastroPessoaFisica {
         cpfValido = digitoVerificador1 == digitoVerificadorInformado1 && digitoVerificador2 == digitoVerificadorInformado2;
 
         System.out.println(numero);
-        if (numero == "00000000000" || numero == "11111111111" || numero == "22222222222" || numero == "33333333333" ||
-        numero == "44444444444" || numero == "55555555555" || numero == "66666666666" || numero == "77777777777" ||
-        numero == "88888888888" || numero == "99999999999") {
+        if (numero.equals("00000000000") || numero.equals("11111111111") || numero.equals("22222222222") ||
+                numero.equals( "33333333333") || numero.equals("44444444444") || numero.equals("55555555555") ||
+                numero.equals("66666666666") || numero.equals( "77777777777") ||numero.equals("88888888888") ||
+                numero.equals("99999999999")) {
             cpfValido = false;
         }
         System.out.println(cpfValido);
