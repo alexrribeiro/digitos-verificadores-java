@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class CadastroPessoaFisica {
     String numeroCpf;
     int digitoVerificador;
@@ -11,45 +9,68 @@ public class CadastroPessoaFisica {
         this.numeroCpf = numeroCpf;
     }
 
-    private void preencherValores(String numeroCpf) {
+    private int[] multiplicarValores(String numeroCpf, int ordem) {
         int[] caractere = new int[numeroCpf.length()];
-        int multiplicador = numeroCpf.length();
-        int soma = 0;
-        int[] produtoDigito = new int[numeroCpf.length()];
+        int multiplicador = 0;
 
-        // Extraindo os dígitos
-        for (int i = 0; i < numeroCpf.length(); i++) {
-            if (i < numeroCpf.length()-2) {
-                caractere[i] = Integer.parseInt(numeroCpf.substring(i, i + 1));
-                produtoDigito[i] = multiplicador * caractere[i];
-                multiplicador--;
-                System.out.println("I: " + i +"\tC: " + caractere[i] + "\tM: " + multiplicador);
-                soma += produtoDigito[i];
-            } else {
-                if (i == 9) {
-                    digitoVerificadorInformado1 = Integer.parseInt(numeroCpf.substring(i, i + 1));
-                } else if (i == 10) {
-                    digitoVerificadorInformado2 = Integer.parseInt(numeroCpf.substring(i, i + 1));
-                }
-            }
+        if (ordem == 1) {
+            multiplicador = numeroCpf.length() - 1;
+        } else if (ordem == 2) {
+            multiplicador = numeroCpf.length();
         }
+
+        int[] produto = new int[numeroCpf.length()];
+
+        for (int i = 0; i < numeroCpf.length(); i++) {
+            caractere[i] = Integer.parseInt(numeroCpf.substring(i, i + 1));
+            produto[i] = multiplicador * caractere[i];
+//            System.out.println("I: " + i +"\tC: " + caractere[i] + "\tM: " + multiplicador + "\tP: " + produto[i]);
+            multiplicador--;
+        }
+        return produto;
+    }
+
+    private void informarDigitosVerificadores(String numeroCpf) {
+        digitoVerificadorInformado1 = Integer.parseInt(numeroCpf.substring(9, 10));
+        digitoVerificadorInformado2 = Integer.parseInt(numeroCpf.substring(10, 11));
         System.out.println("DVs informados: " + digitoVerificadorInformado1 + digitoVerificadorInformado2);
     }
 
-    private int calcularDigito(int soma) {
+    private int calcularDigitoVerificador(int[] grupo, int tamanho) {
+        int soma = 0;
+
+        for (int i = 0; i < tamanho; i++) {
+            soma += grupo[i];
+        }
         soma *= 10;
         digitoVerificador = soma % 11;
+        if (digitoVerificador == 10) {
+            digitoVerificador = 0;
+        }
         System.out.println("DV encontrado: " + digitoVerificador);
         return digitoVerificador;
     }
 
     private boolean verificarDigito(String numero) {
-        preencherValores(numero);
-//        cpfValido = digitoVerificador == digitoVerificadorInformado;
+        informarDigitosVerificadores(numero);
+        int[] primeiroGrupo = multiplicarValores(numero, 1);
+        int digitoVerificador1 = calcularDigitoVerificador(primeiroGrupo, primeiroGrupo.length - 2);
+        int[] segundoGrupo = multiplicarValores(numero, 2);
+        int digitoVerificador2 = calcularDigitoVerificador(segundoGrupo, segundoGrupo.length - 1);
+        cpfValido = digitoVerificador1 == digitoVerificadorInformado1 && digitoVerificador2 == digitoVerificadorInformado2;
+
+        System.out.println(numero);
+        if (numero == "00000000000" || numero == "11111111111" || numero == "22222222222" || numero == "33333333333" ||
+        numero == "44444444444" || numero == "55555555555" || numero == "66666666666" || numero == "77777777777" ||
+        numero == "88888888888" || numero == "99999999999") {
+            cpfValido = false;
+        }
+        System.out.println(cpfValido);
+
         return cpfValido;
     }
 
-    public String validarRegistroGeral(String numero) {
+    public String validarCadastroPessoaFisica(String numero) {
         numero = numero.replace(".","").replace("-","");
         boolean valido = verificarDigito(numero);
         String mensagem;
@@ -64,12 +85,15 @@ public class CadastroPessoaFisica {
     }
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Digite o número do CPF a verificar com os dígitos: ");
-        CadastroPessoaFisica cpf = new CadastroPessoaFisica(sc.next());
-        System.out.println(cpf.validarRegistroGeral(cpf.numeroCpf));
+//        Scanner sc = new Scanner(System.in);
+//        System.out.println("Digite o número do CPF a verificar com os dígitos: ");
+//        CadastroPessoaFisica cpf = new CadastroPessoaFisica(sc.next());
+//        System.out.println(cpf.validarCadastroPessoaFisica(cpf.numeroCpf));
 
-//        RegistroGeral rg2 = new RegistroGeral();
-//        System.out.println(rg2.validarRegistroGeral("41.982.199-5"));
+        CadastroPessoaFisica cpf = new CadastroPessoaFisica();
+        System.out.println(cpf.validarCadastroPessoaFisica("529.874.908-95"));
+        System.out.println(cpf.validarCadastroPessoaFisica("391.653.708-30"));
+        System.out.println(cpf.validarCadastroPessoaFisica("433.858.508-00"));
+        System.out.println(cpf.validarCadastroPessoaFisica("888.888.888-88"));
     }
 }
